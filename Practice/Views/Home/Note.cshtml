@@ -1,0 +1,17 @@
+﻿@model Note
+
+@{
+    ViewData["Title"] = "Create Your Note";
+    var label1 = "Subject:";
+    var label2 = "Content:";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<form asp-action="NoteList" method="post">
+    <label>@label1</label>
+    <input name="inputSubject" value="@Model.subject"><br>
+    <label>@label2</label>
+    <input name="inputContent" value="@Model.content"><br>
+    <input type="submit" value="Save Note">
+</form>

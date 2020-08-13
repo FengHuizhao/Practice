@@ -1,0 +1,16 @@
+﻿@model Select
+
+@{
+    ViewData["Title"] = "The product you choose is:";
+    var label = "please type 1 or 2 to choose a product";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<p>@Model.name</p>
+
+<form asp-action="Select" method="post">
+    <label>@label</label>
+    <input name="inputSelect" value="@Model.value">
+    <input type="submit" value="Submit">
+</form>

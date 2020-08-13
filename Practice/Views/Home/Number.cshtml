@@ -1,0 +1,16 @@
+﻿@model Number
+
+@{
+    ViewData["Title"] = "The Number You Typed is:";
+    var label = "please type an number";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<p>@Model.value</p>
+
+<form asp-action="Number" method="post">
+    <label>@label</label>
+    <input name="inputNumber" value="@Model.value">
+    <input type="submit" value="Submit">
+</form>
