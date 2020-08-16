@@ -8,32 +8,41 @@ namespace Practice.Services
 {
     public class NoteServices : INoteServices
     {
-        private readonly List<Note> notes;
+        private readonly List<Note> _notes;
 
         public NoteServices()
         {
-            notes = new List<Note>();
+            _notes = new List<Note>();
         }
 
-        public Note createNote(string subject, string content)
+        public Note createNote()
         {
-            Note note = new Note(subject, content);
+            Note note = new Note();
             return note;
         }
 
-        public List<Note> GetAllNotes()
+        public IEnumerable<Note> GetAllNotes()
         {
-            return notes;
+            return _notes;
+        }
+
+        public Note FindNoteById(Guid id)
+        {
+            var note = _notes.Find(n => n.Id == id);
+            return note;
         }
 
         public void AddNote(Note note)
         {
             if (note != null)
             {
-                notes.Add(note);
-            }
-            
+                _notes.Add(note);
+            }   
         }
 
+        public void DeleteNote(Note note)
+        {
+            _notes.Remove(note);
+        }
     }
 }

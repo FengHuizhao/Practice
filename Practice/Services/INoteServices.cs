@@ -9,12 +9,14 @@ namespace Practice.Services
     public interface INoteServices
     {
 
-        Note createNote(string subject, string content);
+        Note createNote();
 
-        List<Note> GetAllNotes();
+        IEnumerable<Note> GetAllNotes();
+
+        Note FindNoteById(Guid id);
 
         void AddNote(Note note);
 
-
+        void DeleteNote(Note note);
     }
 }

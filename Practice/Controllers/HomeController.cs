@@ -16,12 +16,12 @@ namespace Practice.Controllers
         private ProductServices productServices = new ProductServices();
         private NumberServices numberServices = new NumberServices();
         private SelectServices selectServices = new SelectServices();
-        private INoteServices noteServices;
+        private INoteServices _noteServices;
      
         public HomeController(ILogger<HomeController> logger, INoteServices noteServices)
         {
             _logger = logger;
-            this.noteServices = noteServices;
+            _noteServices = noteServices;
         }
 
         public IActionResult Index()
@@ -55,6 +55,7 @@ namespace Practice.Controllers
             return View(select);
         }
 
+        [HttpGet]
         // return NoteEditor view
         public IActionResult NoteEditor(string inputSubject = null, string inputContent = null)
         {
@@ -63,31 +64,32 @@ namespace Practice.Controllers
                 inputSubject = "";
                 inputContent = "";
             }
-            Note note = noteServices.createNote(inputSubject, inputContent);
+            Note note = _noteServices.createNote();
             return View(note);
         }
 
         [HttpPost]
         // 1.Save note  2. redirect to NoteList
-        public IActionResult EditNote(string inputSubject = null, string inputContent = null)
+        public IActionResult EditNote()
         {
-            Note note = noteServices.createNote(inputSubject, inputContent);
+            Note note = _noteServices.createNote();
 
-            noteServices.AddNote(note);
+            _noteServices.AddNote(note);
 
             return RedirectToAction("NoteList");
 
         }
 
-        public IActionResult NoteDetail(string inputSubject, string inputContent)
+        public IActionResult NoteDetail(Guid id)
         {
-            Note note = new Note(inputSubject, inputContent);
+            Note note = _noteServices.FindNoteById(id);
+            _noteServices.FindNoteById(id);
             return View(note);
         }
 
         public IActionResult NoteList()
         {
-            IEnumerable<Note> notes = noteServices.GetAllNotes();
+            IEnumerable<Note> notes = _noteServices.GetAllNotes();
 
             return View(notes);
         }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -7,14 +8,13 @@ namespace Practice.Models
 {
     public class Note
     {
-        public Note(string subject, string content)
-        {
-            this.subject = subject;
-            this.content = content;
-        }
+        public Guid Id { get; set; }
+        [Required(ErrorMessage = "Please enter the subject")]
 
-        public string subject { get; set; }
+        public string Subject { get; set; }
 
-        public string content { get; set; }
+        public string Content { get; set; }
+
+        public bool IsDeleted { get; set; }
     }
 }
