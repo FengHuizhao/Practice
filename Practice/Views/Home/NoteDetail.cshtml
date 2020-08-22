@@ -9,9 +9,19 @@
 <h1>@ViewData["Title"]</h1>
 
 <form asp-action="NoteList" method="post">
+    <div>
     <label>@label1</label>
     <input name="inputSubject" value="@Model.Subject"><br>
-    <label>@label2</label>
-    <input name="inputContent" value="@Model.Content"><br>
+    </div>
+
+    <div>
+        <label>@label2</label>
+        <input name="inputContent" value="@Model.Content"><br>
+    </div>
+    
     <input type="submit" value="Back to Note List">
 </form>
+
+<div>
+    <a asp-action="DeleteNote">Delete Note</a>
+</div>

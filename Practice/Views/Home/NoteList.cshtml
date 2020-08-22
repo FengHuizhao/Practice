@@ -9,11 +9,10 @@
 @if (Model.Any())
 {
     @foreach (Note note in Model.Reverse()){
-        <a asp-action="NoteDetail" name="listSubject">@note.Subject</a>
+        <a asp-action="NoteDetail">@note.Subject</a>
     }
 }
 
-<form asp-action="NoteEditor" method="post">
-    <input type="submit" value="New Note">
-</form>
-
+<div>
+    <a asp-action="NoteEditor">New Note</a>
+</div>
