@@ -16,11 +16,12 @@ namespace Practice.Controllers
         private ProductServices productServices = new ProductServices();
         private NumberServices numberServices = new NumberServices();
         private SelectServices selectServices = new SelectServices();
-        private NoteServices noteServices = new NoteServices();
-
-        public HomeController(ILogger<HomeController> logger)
+        private INoteServices noteServices;
+     
+        public HomeController(ILogger<HomeController> logger, INoteServices noteServices)
         {
             _logger = logger;
+            this.noteServices = noteServices;
         }
 
         public IActionResult Index()
@@ -54,7 +55,8 @@ namespace Practice.Controllers
             return View(select);
         }
 
-        public IActionResult Note(string inputSubject = null, string inputContent = null)
+        // return NoteEditor view
+        public IActionResult NoteEditor(string inputSubject = null, string inputContent = null)
         {
             if (String.IsNullOrEmpty(inputSubject))
             {
@@ -65,16 +67,29 @@ namespace Practice.Controllers
             return View(note);
         }
 
+        [HttpPost]
+        // 1.Save note  2. redirect to NoteList
+        public IActionResult EditNote(string inputSubject = null, string inputContent = null)
+        {
+            Note note = noteServices.createNote(inputSubject, inputContent);
+
+            noteServices.AddNote(note);
+
+            return RedirectToAction("NoteList");
+
+        }
+
         public IActionResult NoteDetail(string inputSubject, string inputContent)
         {
             Note note = new Note(inputSubject, inputContent);
             return View(note);
         }
 
-        public IActionResult NoteList(string inputSubject, string inputContent)
+        public IActionResult NoteList()
         {
-            Note note = new Note(inputSubject, inputContent);
-            return View(note);
+            IEnumerable<Note> notes = noteServices.GetAllNotes();
+
+            return View(notes);
         }
 
         public IActionResult Privacy()

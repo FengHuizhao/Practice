@@ -1,4 +1,4 @@
-﻿@model Note
+﻿@model IEnumerable<Note>
 
 @{
     ViewData["Title"] = "Note List";
@@ -6,4 +6,10 @@
 
 <h1>@ViewData["Title"]</h1>
 
-<a asp-action="NoteDetail" name="listSubject">@Model.subject</a>
+@if (Model.Any())
+{
+    @foreach (Note note in Model.Reverse()){
+        <a asp-action="NoteDetail" name="listSubject">@note.subject</a>
+    }                    
+}
+
