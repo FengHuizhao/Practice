@@ -15,12 +15,6 @@ namespace Practice.Services
             _notes = new List<Note>();
         }
 
-        public Note createNote()
-        {
-            Note note = new Note();
-            return note;
-        }
-
         public IEnumerable<Note> GetAllNotes()
         {
             return _notes;

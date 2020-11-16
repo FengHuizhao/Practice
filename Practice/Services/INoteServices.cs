@@ -8,9 +8,6 @@ namespace Practice.Services
 {
     public interface INoteServices
     {
-
-        Note createNote();
-
         IEnumerable<Note> GetAllNotes();
 
         Note FindNoteById(Guid id);

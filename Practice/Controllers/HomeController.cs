@@ -57,24 +57,20 @@ namespace Practice.Controllers
 
         [HttpGet]
         // return NoteEditor view
-        public IActionResult NoteEditor(string inputSubject = null, string inputContent = null)
-        {
-            if (String.IsNullOrEmpty(inputSubject))
-            {
-                inputSubject = "";
-                inputContent = "";
-            }
-            Note note = _noteServices.createNote();
+        public IActionResult NoteEditor(Note note)
+        {   
             return View(note);
         }
 
         [HttpPost]
         // 1.Save note  2. redirect to NoteList
-        public IActionResult EditNote()
+        public IActionResult EditNote(Note note)
         {
-            Note note = _noteServices.createNote();
 
-            _noteServices.AddNote(note);
+            if (note != null)
+            {
+              _noteServices.AddNote(note);
+            }
 
             return RedirectToAction("NoteList");
 
