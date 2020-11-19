@@ -59,7 +59,12 @@ namespace Practice.Controllers
         // return NoteEditor view
         public IActionResult NoteEditor(Note note)
         {   
-            return View(note);
+            if (note != null)
+            {
+                return View(note);
+            }
+
+            return View();
         }
 
         [HttpPost]
@@ -79,7 +84,6 @@ namespace Practice.Controllers
         public IActionResult NoteDetail(Guid id)
         {
             Note note = _noteServices.FindNoteById(id);
-            _noteServices.FindNoteById(id);
             return View(note);
         }
 
