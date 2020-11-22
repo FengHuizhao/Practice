@@ -97,6 +97,8 @@ namespace Practice.Controllers
         public IActionResult DeleteNote(Guid id)
         {
             var note = _noteServices.FindNoteById(id);
+
+            _noteServices.DeleteNote(note);
             note.IsDeleted = true;
             return RedirectToAction("NoteList");
         }
