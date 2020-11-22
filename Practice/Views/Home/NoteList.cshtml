@@ -9,7 +9,7 @@
 @if (Model.Any())
 {
     @foreach (Note note in Model.Reverse()){
-        <a asp-action="NoteDetail" name="listSubject">@note.Subject</a>
+        <a asp-action="NoteDetail">@note.Subject</a>
     }
 }
 

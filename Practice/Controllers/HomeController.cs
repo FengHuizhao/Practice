@@ -94,6 +94,13 @@ namespace Practice.Controllers
             return View(notes);
         }
 
+        public IActionResult DeleteNote(Guid id)
+        {
+            var note = _noteServices.FindNoteById(id);
+            note.IsDeleted = true;
+            return RedirectToAction("NoteList");
+        }
+
         public IActionResult Privacy()
         {
             return View();
